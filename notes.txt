@@ -1,0 +1,19 @@
+1. SVM Paper 1
+
+Step 1: Collect dataset from flickr with tags "yellowstone" and "landscape" OR use image-net dataset
+
+Step 2: Image segmentation - using SLIC superpixel algorithm (use skimage)
+
+Step 3: Image representation and training - Instead of predicting color pixel-by-pixel,
+		we predict two real values (U and V channels) for each segment of the image. 
+		This allows us to color segments based on image structures.
+		For our model, we train two separate SVRs - one for each
+		output channel. To extract feature vectors for each of the
+		image segments, we take the square of 10X10 pixels around
+		each centroid. We then perform a 2D Fast Fourier Transform
+		(FFT) on these squares, giving us our feature vectors fi(x(i)).
+		For both regressions, the feature vectors fi(x(i)) are used as
+		the input, while the average U and V values of the segment
+		x(i) are used as the output.
+
+Step 4: Image Testing and ICM smoothing - 
